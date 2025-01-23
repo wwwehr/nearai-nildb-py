@@ -1,0 +1,24 @@
+{
+  "name": "nildb-test",
+  "version": "0.0.1",
+  "description": "nilDB NEAR AI Agent",
+  "category": "agent",
+  "tags": [],
+  "details": {
+    "agent": {
+      "defaults": {
+        "model": "llama-v3p1-70b-instruct",
+        "model_provider": "fireworks",
+        "model_temperature": 1.0,
+        "model_max_tokens": 16384
+      }
+    },
+    "framework": "nillion",
+    "env_vars": {
+      "schema_id": "<YOUR NILDB SCHEMA ID>",
+      "team": "<YOUR CONTEST TEAM NAME>",
+      "config": "<YOUR NILDB HOST CONFIG AS JSON STRING>"
+    }
+  },
+  "show_entry": true
+}
