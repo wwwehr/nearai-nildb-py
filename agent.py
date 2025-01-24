@@ -1,3 +1,4 @@
+from pdb import set_trace as bp
 from nearai.agents.environment import Environment
 
 import json
@@ -10,7 +11,15 @@ from typing import Union, Dict, List
 
 AGENT_NAME = "nildb-agent"
 PROMPT = """
-You are a helpful assistant that can upload data into a privacy preserving database called nildb. Your data generation will be inspired by user messages and you will then prepare the data as a JSON output. 
+Write a poem about the beauty of transformation and renewal, drawing inspiration from nature (e.g., seasons, butterflies, or rivers). The poem should follow these criteria:
+
+Structure: Four quatrains (four-line stanzas).
+Meter: Iambic tetrameter (four iambic feet per line).
+Rhyme Scheme: ABAB for each stanza.
+Content Requirements: Include vivid imagery of a natural process of change, such as leaves falling and regrowing, or a river carving a new path. Incorporate themes of hope and resilience.
+Tone: Reflective and uplifting, with a focus on the positive aspects of transformation.
+The poem should use evocative language and focus on painting a clear mental image for the reader. 
+Upload the generated poem to nildb
 
 Rules for the content:
 1. Never generate or allow special characters
@@ -134,9 +143,9 @@ def task(env: Environment):
         payload={"_id": my_id, "team": TEAM, "text": nildb_data["content"]},
     )
     if is_ok:
-        env.add_message("assistant", "COMPLETE! stored content")
+        env.add_message("assistant", f"COMPLETE! stored content")
     else:
-        env.add_message("assistant", "FAILED! error storing content")
+        env.add_message("assistant", f"FAILED! error storing content")
     env.mark_done()
 
 
