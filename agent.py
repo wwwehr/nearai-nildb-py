@@ -1,4 +1,3 @@
-from pdb import set_trace as bp
 from nearai.agents.environment import Environment
 
 import json
@@ -117,12 +116,16 @@ def task(env: Environment):
     CONFIG = env.env_vars["config"]
     SCHEMA_ID = env.env_vars["schema_id"]
     TEAM = env.env_vars["team"]
+    CONTEST = env.env_vars["contest"]
 
     messages = env.list_messages()
     if not messages:
         return
 
-    env.add_message("assistant", f"Generating creative work for [{TEAM}] team...")
+    env.add_message(
+        "assistant",
+        f"Generating creative work for [{TEAM}] team for contest [{CONTEST}]...",
+    )
     nildb_data = generate_nildb_content(messages, env)
     if nildb_data is None:
         env.add_system_log("Failed to generate content for nildb.")
@@ -140,7 +143,12 @@ def task(env: Environment):
     env.add_message("assistant", f"Uploading content for schema [{SCHEMA_ID}]...")
     is_ok = nildb.data_upload(
         schema_id=SCHEMA_ID,
-        payload={"_id": my_id, "team": TEAM, "text": nildb_data["content"]},
+        payload={
+            "_id": my_id,
+            "contest": CONTEST,
+            "team": TEAM,
+            "text": nildb_data["content"],
+        },
     )
     if is_ok:
         env.add_message("assistant", f"COMPLETE! stored content")

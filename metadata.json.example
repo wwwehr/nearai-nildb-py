@@ -16,6 +16,7 @@
     "framework": "nillion",
     "env_vars": {
       "schema_id": "<YOUR NILDB SCHEMA ID>",
+      "contest": "<YOUR CONTEST NAME>",
       "team": "<YOUR CONTEST TEAM NAME>",
       "config": "<YOUR NILDB HOST CONFIG AS JSON STRING>"
     }
